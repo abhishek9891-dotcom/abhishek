@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+
+@media screen and (max-width: 960px) {
+  body {
+   
+  }
+}
+
+@media screen and (max-width: 375px) {
+  body {
+    background-color: blue;
+    color: white;
+  }
+}
+.grid-container {
+position: absolute;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  width : 65%;
+  grid-column:1;
+  left: 0px;
+}
+.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
+  color: white;
+}
+
+.headerClass{
+    margin-left: 45%;
+    font-size: 12px;
+    font-style: italic;
+}
+
+.container{
+
+   border-style: groove;
+   margin: 20px auto;
+   display: grid;
+   position: relative;
+   background-color:#eee;
+   height: 300px;
+}
+
+.buttons{
+width:30%;
+grid-column: 2;
+position: absolute;
+right: 0px;
+}
+
+.button-class-shuffle, .button-class-sort{
+    border-radius: 10px;
+    height: 30px;
+    background-color: #72C3DC;
+    margin-top: 20px;
+    color: white;
+    cursor :pointer;
+    width:80px;
+    display: block;
+}
+
+.shuffleAndSortClass{
+    margin-left: 45%;
+    font-size: 16px;
+    font-weight: 800;
+
+}
+
+</style>
+</head>
+<body>
+
+<script>
+ function sort(){
+var list = document.getElementById("list");
+
+var items = list.childNodes;
+var itemsArr = [];
+for (var i in items) {
+    if (items[i].nodeType == 1) { // get rid of the whitespace     text nodes
+    itemsArr.push(items[i]);
+    }
+}
+
+    itemsArr.sort(function(a, b) {
+    return a.innerHTML == b.innerHTML
+          ? 0
+          : (a.innerHTML > b.innerHTML ? 1 : -1);
+});
+
+for (i = 0; i < itemsArr.length; ++i) {
+    list.appendChild(itemsArr[i]);
+}
+ }
+ 
+ 
+ function shuffle(){
+ 
+    var parent = document.getElementById("list");
+    var frag = document.createDocumentFragment();
+    while (parent.children.length) {
+        frag.appendChild(parent.children[Math.floor(Math.random() * parent.children.length)]);
+    }
+    parent.appendChild(frag);
+ 
+ }
+
+</script>
+
+<div class ="shuffleAndSortClass">Shuffle and Sort</div>
+
+<div class="container">
+  <div class="buttons">
+    <button class= "button-class-shuffle" onclick="shuffle()"> SHUFFLE</button>
+    <button class= "button-class-sort" onclick ="sort()"> SORT</button>
+  </div>
+  <div class="grid-container"  id ="list">
+    <div class="grid-item" id="1" style="background-color:#6F98A8;">1</div>
+    <div class="grid-item" id="2"style="background-color:#72C3DC;">2</div>
+    <div class="grid-item" id="3"style="background-color:#2F454E;">3</div>  
+    <div class="grid-item" id="4"style="background-color:#2B8EAD;">4</div>
+    <div class="grid-item" id="5" style="background-color:#2F454E;">5</div>
+    <div class="grid-item" id="6" style="background-color:#BFBFBF;">6</div>  
+    <div class="grid-item" id="7"style="background-color:#BFBFBF;">7</div>
+    <div class="grid-item" id="8"style="background-color:#6F98A8;">8</div>
+    <div class="grid-item" id="9"style="background-color:#2F454E;">9</div>  
+  </div>
+ 
+</div>
+<h3 class ="headerClass">Shuffle and sort by {{Insert Your Name Here}}</h3>
+
+</body>
+
+</html>
